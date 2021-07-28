@@ -268,7 +268,7 @@ func (s *Server) multipartUpload(bucketName string, r *http.Request) jsonRespons
 	rawHeader := r.Header.Get(contentTypeHeader)
 	// ParseMediaType expects the multipart boundary to be enclosed within double quotes. gsutil sends a boundary
 	// enclosed within single quotes instead
-	sanitizedHeader := strings.ReplaceAll(rawHeader, "'", "\"")
+	sanitizedHeader := strings.ReplaceAll(rawHeader, "'", `"`)
 	_, params, err := mime.ParseMediaType(sanitizedHeader)
 	if err != nil {
 		return jsonResponse{
